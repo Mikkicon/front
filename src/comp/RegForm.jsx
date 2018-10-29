@@ -73,8 +73,8 @@ class RegForm extends Component {
         body: JSON.stringify({
           email: this.state.mail,
           password: this.state.pass,
-          name: this.state.name,
-          surname: this.state.surname
+          fname: this.state.name,
+          sname: this.state.surname
         }),
         headers: {
           "Content-Type": "application/json"
