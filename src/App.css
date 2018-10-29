@@ -7,6 +7,21 @@
   height: 40vmin;
 }
 
+.flex-container {
+  display: "flex";
+  background: "white";
+  width: "100%";
+  height: "100px";
+  top: "0";
+}
+.navbar {
+  position: fixed;
+  height: 70px;
+  top: 0;
+  background-color: black;
+  color: white;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -29,4 +44,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.input_form {
+  border-radius: 10%;
+  width: 200px;
+  height: 20px;
+}
+
+.input_form:hover {
+  border: blue;
 }
