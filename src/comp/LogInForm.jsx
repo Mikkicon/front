@@ -56,6 +56,11 @@ class LogInForm extends Component {
       <React.Fragment>
         <div className="container">
           <div className="container">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             {/* Mail input field */}
             <input
               type="text"

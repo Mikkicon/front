@@ -17,6 +17,7 @@
 .navbar {
   position: fixed;
   height: 70px;
+  width: 100%;
   top: 0;
   background-color: black;
   color: white;

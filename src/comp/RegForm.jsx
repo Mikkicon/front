@@ -89,65 +89,72 @@ class RegForm extends Component {
     return (
       <React.Fragment>
         <div className="container">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Mail"
-            onChange={this.handleMailChange.bind(this)}
-            onFocus={() => this.setState({ errorMail: true })}
-          />
+          <div className="container">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Mail"
+              onChange={this.handleMailChange.bind(this)}
+              onFocus={() => this.setState({ errorMail: true })}
+            />
 
-          <label>{this.state.errorMail ? "Error" : "Login"}</label>
-          <br />
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Password"
-            onChange={this.handlePasswordChange.bind(this)}
-            onFocus={() => this.setState({ errorPass: true })}
-            required
-          />
-          <label>{this.state.errorPass ? "Error" : "Password"}</label>
-          <br />
+            <label>{this.state.errorMail ? "Error" : "Login"}</label>
+            <br />
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Password"
+              onChange={this.handlePasswordChange.bind(this)}
+              onFocus={() => this.setState({ errorPass: true })}
+              required
+            />
+            <label>{this.state.errorPass ? "Error" : "Password"}</label>
+            <br />
 
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Confirm Password"
-            onChange={this.handlePasswordConfChange.bind(this)}
-            onFocus={() => this.setState({ errorConfPass: true })}
-          />
-          <label>
-            {this.state.errorConfPass ? "Error" : "Confirm Password"}
-          </label>
-          <br />
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Confirm Password"
+              onChange={this.handlePasswordConfChange.bind(this)}
+              onFocus={() => this.setState({ errorConfPass: true })}
+            />
+            <label>
+              {this.state.errorConfPass ? "Error" : "Confirm Password"}
+            </label>
+            <br />
 
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Name"
-            onChange={this.writeName.bind(this)}
-            onFocus={() => this.setState({ errorName: true })}
-          />
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Name"
+              onChange={this.writeName.bind(this)}
+              onFocus={() => this.setState({ errorName: true })}
+            />
 
-          <label>{this.state.errorName ? "Error" : "Name"}</label>
-          <br />
+            <label>{this.state.errorName ? "Error" : "Name"}</label>
+            <br />
 
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Surname"
-            onChange={this.writeSurName.bind(this)}
-            onFocus={() => this.setState({ errorName: true })}
-          />
-          <label>{this.state.errorName ? "Error" : "Surname"}</label>
-          <button
-            className="btn btn-outline-primary m-2"
-            onClick={this.handleSubmit}
-          >
-            Submit
-          </button>
-          <label>{this.state.alert}</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Surname"
+              onChange={this.writeSurName.bind(this)}
+              onFocus={() => this.setState({ errorName: true })}
+            />
+            <label>{this.state.errorName ? "Error" : "Surname"}</label>
+            <button
+              className="btn btn-outline-primary m-2"
+              onClick={this.handleSubmit}
+            >
+              Submit
+            </button>
+            <label>{this.state.alert}</label>
+          </div>
         </div>
       </React.Fragment>
     );

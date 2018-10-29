@@ -43,7 +43,8 @@ class App extends Component {
       chars: "",
       errors: { mail: false, password: false, names: false, all: false },
       loading: false,
-      callback: false
+      callback: false,
+      attachments: [1, 1, 2, 3]
     };
   }
 
@@ -62,7 +63,10 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Navbar />
+          <header className="navbar" style={{ position: "fixed" }}>
+            <Navbar />
+          </header>
+
           <br />
           <Route
             path="/login"
@@ -74,6 +78,7 @@ class App extends Component {
             path="/order"
             component={Order}
             yesno={this.state.callback}
+            attachments={this.state.attachments}
           />
         </div>
       </BrowserRouter>
