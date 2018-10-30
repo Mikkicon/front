@@ -1,39 +1,14 @@
 import React, { Component } from "react";
 // import Header from "./comp/Header";
-import Order from "./comp/Order";
-import RegForm from "./comp/RegForm";
-import LogInForm from "./comp/LogInForm";
-import AdminPage from "./comp/AdminPage";
-import Navbar from "./comp/Navbar";
-// import PrivateRoute from "./PrivateRoute";
+import Order from "./Order";
+import RegForm from "./user/RegForm";
+import LogInForm from "./user/LogInForm";
+import AdminPage from "./common/AdminPage";
+import Navbar from "./common/Navbar";
+import PrivateRoute from "./common/PrivateRoute";
+import Profile from "./user/Profile";
 import "./App.css";
-import { Route, BrowserRouter, Redirect } from "react-router-dom";
-
-const fakeAuth = {
-  isAuthenticated: true,
-  authenticate(cb) {
-    this.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
-  },
-  signout(cb) {
-    this.isAuthenticated = false;
-    setTimeout(cb, 100); // fake async
-  }
-};
-const PrivateRoute = ({ component: Component, yesno: a, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      fakeAuth.isAuthenticated ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{ pathname: "/login", state: { from: props.location } }}
-        />
-      )
-    }
-  />
-);
+import { Route, BrowserRouter } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -43,8 +18,9 @@ class App extends Component {
       chars: "",
       errors: { mail: false, password: false, names: false, all: false },
       loading: false,
-      callback: false,
-      attachments: [1, 1, 2, 3]
+      isAuthenticated: false,
+      attachments: [1, 1, 2, 3],
+      currentUser: null
     };
   }
 
@@ -53,13 +29,16 @@ class App extends Component {
     // fetch("http://localhost:8080/login");
   }
   callbk = a => {
+    console.log("App, a: ", a.status);
     // fakeAuth.isAuthenticated = a.status;
-    this.setState({ callback: a.status });
+    this.setState({ isAuthenticated: a.status });
+    console.log(this.state.isAuthenticated);
   };
   f() {
-    return this.state.callback;
+    return this.state.isAuthenticated;
   }
   render() {
+    // console.log("App, isAuthenticated: ", this.state.isAuthenticated);
     return (
       <BrowserRouter>
         <div>
@@ -69,15 +48,40 @@ class App extends Component {
 
           <br />
           <Route
+            exact
+            path="/"
+            render={() => (
+              <div>
+                <br />
+                <br />
+                <br /> <h1>Home page</h1>
+              </div>
+            )}
+          />
+          <Route
             path="/login"
             render={() => <LogInForm isAuth={this.callbk} />}
           />
           <Route path="/registration" component={RegForm} />
-          <PrivateRoute exact path="/admin" component={AdminPage} />
+          <PrivateRoute
+            path="/admin"
+            yesno={this.state.isAuthenticated}
+            component={AdminPage}
+          />
+          <PrivateRoute
+            path="/user"
+            render={props => (
+              <Profile
+                isAuthenticated={this.state.isAuthenticated}
+                user={this.state.currentUser}
+                {...props}
+              />
+            )}
+          />
           <PrivateRoute
             path="/order"
             component={Order}
-            yesno={this.state.callback}
+            yesno={this.state.isAuthenticated}
             attachments={this.state.attachments}
           />
         </div>

@@ -5,6 +5,9 @@ class AdminPage extends Component {
     return (
       <React.Fragment>
         <div className="container">
+          <br />
+          <br />
+          <br />
           <h1>Admin page</h1>
         </div>
       </React.Fragment>

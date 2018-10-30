@@ -18,7 +18,7 @@ class LogInForm extends Component {
     const v = p.target.value;
     // Remembering mail value for submit
     this.setState({ mail: v });
-    console.log(this.state.mail);
+    // console.log(this.state.mail);
     // Check regex notation
     /[a-zA-Z0-9._+-]+@[a-zA-Z+-]+\.[a-z]+$/.test(p.target.value)
       ? this.setState({ error: false })
@@ -45,7 +45,6 @@ class LogInForm extends Component {
       .then(a => this.props.isAuth(a))
       .catch(error => console.log(error));
     // If any error is still present or password is < 6 printing error
-    console.log(this.state.res);
     this.state.error || this.state.password.length < 6
       ? this.setState({ alert: "Fields are not filled propperly" })
       : this.setState({ alert: "Logging in..." });
