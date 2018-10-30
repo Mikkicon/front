@@ -8,7 +8,7 @@ import Navbar from "./common/Navbar";
 import PrivateRoute from "./common/PrivateRoute";
 import Profile from "./user/Profile";
 import "./App.css";
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, BrowserRouter, Redirect } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +20,8 @@ class App extends Component {
       loading: false,
       isAuthenticated: false,
       attachments: [1, 1, 2, 3],
-      currentUser: null
+      currentUser: null,
+      history: ""
     };
   }
 
@@ -58,6 +59,7 @@ class App extends Component {
               </div>
             )}
           />
+          {this.state.isAuthenticated && <Redirect to={"/order"} />}
           <Route
             path="/login"
             render={() => <LogInForm isAuth={this.callbk} />}
@@ -67,6 +69,7 @@ class App extends Component {
             path="/admin"
             yesno={this.state.isAuthenticated}
             component={AdminPage}
+            history={this.state.history}
           />
           <PrivateRoute
             path="/user"
@@ -77,12 +80,14 @@ class App extends Component {
                 {...props}
               />
             )}
+            history={this.state.history}
           />
           <PrivateRoute
             path="/order"
             component={Order}
             yesno={this.state.isAuthenticated}
             attachments={this.state.attachments}
+            history={this.state.history}
           />
         </div>
       </BrowserRouter>

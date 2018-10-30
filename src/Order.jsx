@@ -23,10 +23,10 @@ class Order extends Component {
     let attachments = [];
     let comments = [];
     for (let i = 0; i < 3; i++) {
-      attachments.push(<li>Attachment {i}</li>);
+      attachments.push(<li key={i}>Attachment {i}</li>);
     }
     for (let i = 0; i < 3; i++) {
-      comments.push(<h5>Comment {i}</h5>);
+      comments.push(<h5 key={i}>Comment {i}</h5>);
     }
     for (let i = 0; i < this.state.num; i++) {
       items.push(

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import { Redirect } from "react-router-dom";
 class RegForm extends Component {
   state = {
     //   To compare passwords
@@ -68,7 +69,7 @@ class RegForm extends Component {
       this.setState({ alert: "Fields are not filled propperly" });
     } else {
       this.setState({ alert: "Registring..." });
-      fetch("http://localhost:8080/register", {
+      fetch("http://localhost:3010/register", {
         method: "POST",
         body: JSON.stringify({
           email: this.state.mail,

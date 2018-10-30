@@ -51,6 +51,8 @@ class LogInForm extends Component {
   };
   render() {
     // const { from } = this.props.location.state || { from: { pathname: "/" } };
+    // console.log("From: ", this.props.from);
+    console.log("Props: ", this.props);
     return (
       <React.Fragment>
         <div className="container">

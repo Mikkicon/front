@@ -15,7 +15,7 @@ class PrivateRoute extends Component {
 
     // console.log("Private route, auth: ", this.state.auth);
 
-    console.log("Private route, prop yesno: ", this.props.yesno);
+    // console.log("Private route, prop yesno: ", this.props.yesno);
     return (
       <Route
         {...props}
