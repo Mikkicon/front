@@ -15,12 +15,13 @@
   top: "0";
 }
 .navbar {
-  position: fixed;
+  position: absolute;
   height: 70px;
   width: 100%;
   top: 0;
   background-color: black;
   color: white;
+  z-index: 2000;
 }
 
 .App-header {

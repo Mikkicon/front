@@ -47,7 +47,7 @@ class RegForm extends Component {
   handleNamesChange = p => {
     this.setState({ name: p.target.value });
     //   Only lettersa
-    console.log(p.target.value);
+    // console.log(p.target.value);
     /[a-zA-Z]+/.test(p.target.value)
       ? this.setState({ errorName: false })
       : this.setState({ errorName: true });
@@ -107,7 +107,7 @@ class RegForm extends Component {
             <label>{this.state.errorMail ? "Error" : "Login"}</label>
             <br />
             <input
-              type="text"
+              type="password"
               className="form-control"
               placeholder="Password"
               onChange={this.handlePasswordChange.bind(this)}
@@ -118,7 +118,7 @@ class RegForm extends Component {
             <br />
 
             <input
-              type="text"
+              type="password"
               className="form-control"
               placeholder="Confirm Password"
               onChange={this.handlePasswordConfChange.bind(this)}

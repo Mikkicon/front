@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-class Profile extends Component {
+class Loading extends Component {
   state = {};
   render() {
     return (
@@ -7,13 +7,10 @@ class Profile extends Component {
         <br />
         <br />
         <br />
-        {/* {this.props.user.map(u => (
-          <li>u</li>
-        ))} */}
-        {console.log(this.props.user)}
+        <h1>The site is loading please wait...</h1>
       </React.Fragment>
     );
   }
 }
 
-export default Profile;
+export default Loading;

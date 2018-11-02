@@ -9,21 +9,26 @@ class Navbar extends Component {
             <h2 style={{ color: "white" }}>Navbar</h2>
           </a>
           <div className=" btn btn-outline-default" />
-          {!this.props.isAuthenticated && (
-            <a className=" btn  btn-outline-default" href="/login">
-              Login
-            </a>
-          )}
-          {!this.props.isAuthenticated && (
-            <a className=" btn  btn-outline-success" href="/registration">
-              Register
-            </a>
-          )}
-          <a className=" btn  btn-outline-danger" href="/admin">
+
+          <a className=" btn  btn-outline-default" href="/admin">
             Admin
           </a>
+
           <a className=" btn  btn-outline-primary" href="/order">
             Order
+          </a>
+          <a
+            className=" btn  btn-outline-danger"
+            onClick={() => {
+              window.confirm("Do you want to log out?")
+                ? fetch("http://localhost:3010/logout", { method: "GET" })
+                    .then(() => this.props.logout())
+                    .catch(e => console.log(e))
+                : console.log("Canceled");
+            }}
+          >
+            {" "}
+            Logout
           </a>
         </div>
       </React.Fragment>

@@ -1,14 +1,9 @@
 import React, { Component } from "react";
-// import Header from "./comp/Header";
-import Order from "./Order";
-import RegForm from "./user/RegForm";
-import LogInForm from "./user/LogInForm";
-import AdminPage from "./common/AdminPage";
+import Routes from "./Routes";
 import Navbar from "./common/Navbar";
-import PrivateRoute from "./common/PrivateRoute";
-import Profile from "./user/Profile";
+import NavbarAuth from "./common/NavBarAuth";
 import "./App.css";
-import { Route, BrowserRouter, Redirect } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -20,76 +15,60 @@ class App extends Component {
       loading: false,
       isAuthenticated: false,
       attachments: [1, 1, 2, 3],
-      currentUser: null,
-      history: ""
+      currentUser: { name: "User", role: 0 },
+      userrole: 0,
+      history: "",
+      session: ""
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ loading: true });
-    // fetch("http://localhost:8080/login");
+
+    await fetch("http://localhost:3010/session", {
+      method: "GET"
+    })
+      .then(response => response.json())
+      .then(
+        a =>
+          a.user ? this.setState({ isAuthenticated: true }) : console.log(false)
+      )
+      .catch(error => console.log(error));
   }
+
+  // this.setState({ session: localStorage.getItem("session") });
+  // fetch("http://localhost:8080/login");
+
   callbk = a => {
-    console.log("App, a: ", a.status);
-    // fakeAuth.isAuthenticated = a.status;
     this.setState({ isAuthenticated: a.status });
-    console.log(this.state.isAuthenticated);
+    // localStorage.setItem("isauth", a.status);
+    // this.setState({ isAuthenticated: localStorage.getItem("isauth") });
   };
-  f() {
-    return this.state.isAuthenticated;
-  }
+  logoutFn = a => {
+    this.setState({ isAuthenticated: false });
+  };
+
   render() {
     // console.log("App, isAuthenticated: ", this.state.isAuthenticated);
+    const childProps = {
+      isAuthenticated: this.state.isAuthenticated,
+      isAuth: this.callbk
+    };
     return (
       <BrowserRouter>
-        <div>
-          <header className="navbar" style={{ position: "fixed" }}>
-            <Navbar />
-          </header>
-
-          <br />
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <div>
-                <br />
-                <br />
-                <br /> <h1>Home page</h1>
-              </div>
-            )}
-          />
-          {this.state.isAuthenticated && <Redirect to={"/order"} />}
-          <Route
-            path="/login"
-            render={() => <LogInForm isAuth={this.callbk} />}
-          />
-          <Route path="/registration" component={RegForm} />
-          <PrivateRoute
-            path="/admin"
-            yesno={this.state.isAuthenticated}
-            component={AdminPage}
-            history={this.state.history}
-          />
-          <PrivateRoute
-            path="/user"
-            render={props => (
-              <Profile
-                isAuthenticated={this.state.isAuthenticated}
-                user={this.state.currentUser}
-                {...props}
-              />
-            )}
-            history={this.state.history}
-          />
-          <PrivateRoute
-            path="/order"
-            component={Order}
-            yesno={this.state.isAuthenticated}
-            attachments={this.state.attachments}
-            history={this.state.history}
-          />
-        </div>
+        <React.Fragment>
+          {this.state.isAuthenticated && (
+            <header className="navbar" style={{ position: "fixed" }}>
+              <NavbarAuth logout={this.logoutFn} />
+            </header>
+          )}
+          {!this.state.isAuthenticated && (
+            <header className="navbar" style={{ position: "fixed" }}>
+              <Navbar />
+            </header>
+          )}
+          <Routes childProps={childProps} />
+        </React.Fragment>
       </BrowserRouter>
     );
   }

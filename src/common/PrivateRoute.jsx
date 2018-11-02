@@ -1,36 +1,50 @@
-import React, { Component } from "react";
+import React from "react";
 
 import { Route, Redirect } from "react-router-dom";
-class PrivateRoute extends Component {
-  constructor(props) {
-    super(props);
-    console.log(this.props);
-    this.state = {
-      auth: false
-    };
-  }
+// class PrivateRoute extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       auth: false
+//     };
+//   }
 
-  render() {
-    const { component: Component, ...props } = this.props;
+//   render() {
+//     const { component: COMPonnt, ...props } = this.props;
 
-    // console.log("Private route, auth: ", this.state.auth);
+//     return (
+//       <Route
+//         {...props}
+//         render={props => {
+//           if (this.props.yesno === true) {
+//           } else {
+//           }
+//           return (
+//             <Redirect
+//               to={{ pathname: "/login", state: { from: this.props.path } }}
+//             />
+//           );
+//         }}
+//       />
+//     );
+//   }
+// }
 
-    // console.log("Private route, prop yesno: ", this.props.yesno);
-    return (
-      <Route
-        {...props}
-        render={props =>
-          this.props.yesno ? (
-            <Component {...props} />
-          ) : (
-            <Redirect
-              to={{ pathname: "/login", state: { from: props.location } }}
-            />
-          )
-        }
-      />
-    );
-  }
-}
-
-export default PrivateRoute;
+export default ({ component: C, props: cProps, ...rest }) => {
+  // const redirect = querystring("redirect");
+  console.log("cProps.yesno: ", cProps.yesno);
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        !cProps.yesno ? (
+          <C {...props} {...cProps} />
+        ) : (
+          <Redirect
+            to={{ pathname: "/login", state: { from: this.props.path } }}
+          />
+        )
+      }
+    />
+  );
+};

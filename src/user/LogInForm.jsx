@@ -4,7 +4,7 @@ import "jquery";
 class LogInForm extends Component {
   constructor(props) {
     super(props);
-
+    // console.log("Login: ", this.props);
     this.state = {
       mail: "",
       password: "",
@@ -30,7 +30,7 @@ class LogInForm extends Component {
     this.setState({ password: v });
   };
   handleSubmit = () => {
-    console.log(this.state.mail, "\n", this.state.password);
+    // console.log(this.state.mail, "\n", this.state.password);
     fetch("http://localhost:3010/login", {
       method: "POST",
       body: JSON.stringify({
@@ -50,9 +50,10 @@ class LogInForm extends Component {
       : this.setState({ alert: "Logging in..." });
   };
   render() {
+    // console.log("Login: ", this.props.history);
     // const { from } = this.props.location.state || { from: { pathname: "/" } };
     // console.log("From: ", this.props.from);
-    console.log("Props: ", this.props);
+    // console.log("Props: ", this.props);
     return (
       <React.Fragment>
         <div className="container">
@@ -66,6 +67,7 @@ class LogInForm extends Component {
             <input
               type="text"
               placeholder="Mail"
+              autoFocus
               onChange={this.handleMailChange.bind(this)}
               className="form-control"
             />
@@ -75,7 +77,7 @@ class LogInForm extends Component {
 
             {/* Password input field */}
             <input
-              type="text"
+              type="password"
               placeholder="Password"
               className="form-control"
               onChange={this.handlePasswordChange.bind(this)}
